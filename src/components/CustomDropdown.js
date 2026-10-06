@@ -6,8 +6,15 @@ import { COLORS } from '../constants/colors';
 export const CustomDropdown = ({ label, options, value, onSelect, placeholder = 'Select an option' }) => {
   const [modalVisible, setModalVisible] = useState(false);
 
+  const getItemLabel = (item) => (typeof item === 'object' && item !== null ? item.label : item);
+  const getItemValue = (item) => (typeof item === 'object' && item !== null ? item.value : item);
+
+  const selectedItem = options.find((item) => getItemValue(item) === value);
+  const displayTriggerText = selectedItem ? getItemLabel(selectedItem) : value ? value : placeholder;
+
   const handleSelect = (item) => {
-    onSelect(item);
+    const itemVal = getItemValue(item);
+    onSelect(itemVal);
     setModalVisible(false);
   };
 
@@ -21,7 +28,7 @@ export const CustomDropdown = ({ label, options, value, onSelect, placeholder = 
         activeOpacity={0.8}
       >
         <Text style={[styles.triggerText, !value && styles.placeholderText]}>
-          {value || placeholder}
+          {displayTriggerText}
         </Text>
         <ChevronDown size={18} color={COLORS.textMuted} />
       </TouchableOpacity>
@@ -47,16 +54,18 @@ export const CustomDropdown = ({ label, options, value, onSelect, placeholder = 
 
             <FlatList
               data={options}
-              keyExtractor={(item) => item}
+              keyExtractor={(item, index) => getItemValue(item) || index.toString()}
               renderItem={({ item }) => {
-                const isSelected = value === item;
+                const itemVal = getItemValue(item);
+                const itemLbl = getItemLabel(item);
+                const isSelected = value === itemVal;
                 return (
                   <TouchableOpacity
                     style={[styles.optionItem, isSelected && styles.selectedOption]}
                     onPress={() => handleSelect(item)}
                   >
                     <Text style={[styles.optionText, isSelected && styles.selectedOptionText]}>
-                      {item}
+                      {itemLbl}
                     </Text>
                     {isSelected ? <Check size={16} color={COLORS.primary} /> : null}
                   </TouchableOpacity>
@@ -76,22 +85,23 @@ const styles = StyleSheet.create({
   },
   label: {
     color: COLORS.textSecondary,
-    fontSize: 13,
-    fontWeight: '600',
+    fontSize: 11,
+    fontWeight: '800',
+    letterSpacing: 0.6,
   },
   trigger: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: COLORS.inputBg,
-    borderRadius: 12,
+    backgroundColor: '#ffffff',
+    borderRadius: 14,
     borderWidth: 1,
-    borderColor: COLORS.border,
+    borderColor: '#cbd5e1',
     paddingHorizontal: 14,
     height: 48,
   },
   triggerText: {
-    color: COLORS.textPrimary,
+    color: '#0f172a',
     fontSize: 14,
     fontWeight: '500',
   },
@@ -138,14 +148,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   selectedOption: {
-    backgroundColor: 'rgba(37, 99, 235, 0.15)',
+    backgroundColor: 'rgba(15, 23, 42, 0.08)',
   },
   optionText: {
     color: COLORS.textSecondary,
     fontSize: 14,
   },
   selectedOptionText: {
-    color: COLORS.primary,
+    color: '#0f172a',
     fontWeight: '700',
   },
 });
