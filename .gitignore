@@ -10,12 +10,16 @@ node_modules/
 dist/
 web-build/
 
-# Native Builds & Binaries
+# Native Build Caches & Outputs
+.gradle/
+android/.gradle/
+android/build/
+android/app/build/
+
+# Binaries & Secrets
 *.apk
 *.aab
 *.ipa
-
-# Secret & Environment Files
 .env
 .env.local
 .env.development.local

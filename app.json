@@ -27,10 +27,12 @@
       },
       "package": "com.hostelsaathi.student",
       "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE",
-        "READ_MEDIA_IMAGES"
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
       ]
     },
     "web": {
@@ -49,6 +51,11 @@
           "photosPermission": "Allow HostelSaathi to access your photos to attach complaint proof images."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "b3821fee-59a6-45cf-ad83-d45b8460c526"
+      }
+    }
   }
 }
