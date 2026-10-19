@@ -6,12 +6,6 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
-    "newArchEnabled": true,
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#090d16"
-    },
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.hostelsaathi.student",
@@ -49,6 +43,18 @@
         "expo-image-picker",
         {
           "photosPermission": "Allow HostelSaathi to access your photos to attach complaint proof images."
+        }
+      ],
+      "expo-asset",
+      "expo-font",
+      "expo-secure-store",
+      "expo-status-bar",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#090d16"
         }
       ]
     ],
